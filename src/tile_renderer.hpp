@@ -50,7 +50,25 @@ private:
   uint16_t  next_free;
 
   Tileset* tileset;
-  TileMap* tilemap[4];
+
+  struct Layer {
+    TileMap* tilemap;
+    uint16_t log_x;
+    uint16_t log_y;
+    uint16_t new_log_x;
+    uint16_t new_log_y;
+    uint8_t x_offset;
+    uint8_t y_offset;
+
+    Layer() 
+      : tilemap(0), 
+        log_x(0), log_y(0),
+        new_log_x(0), new_log_y(0),
+        x_offset(0), y_offset(0)
+    {}
+  };
+
+  Layer layers[4];
 
 public:
   TileRenderer();
@@ -69,7 +87,12 @@ public:
 
   void set_palette(const void* pal);
 
+  void prepare_layer(uint8_t layer_num);
+
+  void copy_tilemap(uint8_t layer_num);
+
   void done();
+
 private:
   /** Allocate a tile in VRAM and copy the ROM tile over to VRAM */
   uint16_t create_vram_tile(uint16_t rom_id);

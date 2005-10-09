@@ -53,6 +53,9 @@ private:
   Console& operator= (const Console&);
 };
 
+Console& operator<<(Console& c, const char* buf);
+Console& operator<<(Console& c, uint16_t num);
+
 extern Console console;
 
 #endif

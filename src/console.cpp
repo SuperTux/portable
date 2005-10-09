@@ -138,4 +138,16 @@ Console::print(uint16_t num)
     }
 }
 
+Console& operator<<(Console& c, const char* buf)
+{
+  c.print(buf);
+  return c;
+}
+
+Console& operator<<(Console& c, uint16_t num)
+{
+  c.print(num); 
+  return c;
+}
+
 /* EOF */
