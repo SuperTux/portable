@@ -1,6 +1,10 @@
 /*  $Id$
-**  
-**  SuperTux Portable
+**   __      __ __             ___        __   __ __   __
+**  /  \    /  \__| ____    __| _/_______/  |_|__|  | |  |   ____
+**  \   \/\/   /  |/    \  / __ |/  ___/\   __\  |  | |  | _/ __ \
+**   \        /|  |   |  \/ /_/ |\___ \  |  | |  |  |_|  |_\  ___/
+**    \__/\  / |__|___|  /\____ /____  > |__| |__|____/____/\___  >
+**         \/          \/      \/    \/                         \/
 **  Copyright (C) 2005 Ingo Ruhnke <grumbel@gmx.de>
 **
 **  This program is free software; you can redistribute it and/or
@@ -19,25 +23,9 @@
 **  02111-1307, USA.
 */
 
-#ifndef HEADER_TILESET_HPP
-#define HEADER_TILESET_HPP
+#include "globals.hpp"
 
-#include "types.hpp"
-
-/** Handles a tileset in ROM */
-class Tileset
-{
-private:
-  const uint16_t* data;
-
-public:
-  Tileset(const void* data);
-  ~Tileset();
-
-  /** Returns a pointer to the start of tile \a id */
-  const uint16_t* get_tile(uint16_t id);
-};
-
-#endif
+TileManager*  tile_manager  = 0;
+TileRenderer* tile_renderer = 0;
 
 /* EOF */

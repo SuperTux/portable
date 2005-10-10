@@ -25,28 +25,26 @@
 #include "fade.h"
 #include <math.h>
 
+#include "globals.hpp"
 #include "video.hpp"
 #include "math.hpp"
 
 #include <stdlib.h>
 
 // Data for use in the game
-#include "../build/tileset_img_raw.h"
-#include "../build/tileset_pal_raw.h"
+#include "../build/antarctica_img_raw.h"
+#include "../build/antarctica_pal_raw.h"
+#include "../build/level1_raw.h"
 
 #include "tileset.hpp"
 #include "tile_map.hpp"
 #include "console.hpp"
 #include "tile_renderer.hpp"
 
-u16 PaletteBuffer[256];
-
 unsigned int frame;
-u8 line_count; 
 
 void VblankInterrupt()
 {
-  line_count = 0;
   frame += 1;
   ScanKeys();
 }
@@ -67,27 +65,29 @@ int main(void)
   SetMode( MODE_0 | BG0_ON | BG3_ON );		// screen mode & background to display
 
   // console layer
-  BGCTRL[0] = BG_PRIORITY(0) | CHAR_BASE(0) | BG_MOSAIC | BG_256_COLOR | SCREEN_BASE(31) | BG_SIZE_0;
+  BGCTRL[0] = BG_PRIORITY(0) | CHAR_BASE(0) | BG_MOSAIC | BG_256_COLOR | SCREEN_BASE(28) | BG_SIZE_0;
+  BGCTRL[1] = BG_PRIORITY(0) | CHAR_BASE(0) | BG_MOSAIC | BG_256_COLOR | SCREEN_BASE(29) | BG_SIZE_0;
+  BGCTRL[2] = BG_PRIORITY(0) | CHAR_BASE(0) | BG_MOSAIC | BG_256_COLOR | SCREEN_BASE(30) | BG_SIZE_0;
+  BGCTRL[3] = BG_PRIORITY(0) | CHAR_BASE(0) | BG_MOSAIC | BG_256_COLOR | SCREEN_BASE(31) | BG_SIZE_0;
 
-  BGCTRL[3] = BG_PRIORITY(0) | CHAR_BASE(0) | BG_MOSAIC | BG_256_COLOR | SCREEN_BASE(28) | BG_SIZE_0;
+  TileManager  stack_tile_manager;
+  TileRenderer stack_tile_renderer;
 
-  // mosaic works: *((u16*)0x400004C) = (3 << 0) | (3 << 4);
-  uint16_t tilemap_data[32*32];
-  for(uint16_t i = 0; i < 32*32; ++i)
-    tilemap_data[i] = i;
-
-  Tileset tileset(tileset_img_raw);
-  TileMap tilemap(32, 32, tilemap_data);
-  TileRenderer tile_renderer;
+  tile_manager  = &stack_tile_manager;
+  tile_renderer = &stack_tile_renderer;
   
-  tile_renderer.set_tileset(&tileset);
-  tile_renderer.set_tilemap(3, &tilemap);
-  tile_renderer.set_palette(tileset_pal_raw);
-  tile_renderer.done();
+  Tileset tileset(antarctica_img_raw);
+  TileMap tilemap((uint16_t*)level1_raw);
+ 
+  tile_manager->set_tileset(&tileset);
+  tile_renderer->set_tilemap(1, &tilemap);
+  tile_renderer->set_palette(antarctica_pal_raw);
+  tile_renderer->done();
+
+  console.print("SupeTux Portable Version 0.0.0\n");
 
   if (0)
     {
-      console.print("SupeTux Portable Version 0.0.0\n");
       console.print("==============================\n");
       console.print("\nThis program is free software;"
                     "you can redistribute it and/or"
@@ -99,6 +99,8 @@ int main(void)
                     "(at your option) any later\n"
                     "version. Version 0.0.0\n");
     }
+
+  ScanKeys();
 
   bg_scroll scroll;
   scroll.x  = 0;
@@ -125,10 +127,7 @@ int main(void)
           scroll.x -= 1;
         }
 
-      console.moveto(0,0);
-      console << scroll.x << "x" << scroll.y << "   \n";
-
-      tile_renderer.set_tilemap_offset(3, scroll.x, scroll.y);
+      tile_renderer->set_tilemap_offset(1, scroll.x, scroll.y);
 
       VBlankIntrWait();
     }

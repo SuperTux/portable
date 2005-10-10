@@ -31,7 +31,7 @@
 Console console;
 
 Console::Console()
-  : screen((uint16_t*)MAP_BASE_ADR(31)),
+  : screen((uint16_t*)MAP_BASE_ADR(28)),
     x_pos(0),
     y_pos(0),
     width(30),
