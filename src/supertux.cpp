@@ -62,7 +62,7 @@ int main(void)
   // Allow Interrupts
   REG_IME = 1;
 
-  SetMode( MODE_0 | BG0_ON | BG3_ON );		// screen mode & background to display
+  SetMode( MODE_0 | BG0_ON | BG1_ON );		// screen mode & background to display
 
   // console layer
   BGCTRL[0] = BG_PRIORITY(0) | CHAR_BASE(0) | BG_MOSAIC | BG_256_COLOR | SCREEN_BASE(28) | BG_SIZE_0;
@@ -84,10 +84,9 @@ int main(void)
   tile_renderer->set_palette(antarctica_pal_raw);
   tile_renderer->done();
 
-  console.print("SupeTux Portable Version 0.0.0\n");
-
-  if (0)
+  if (1)
     {
+      console.print("SupeTux Portable Version 0.0.0\n");
       console.print("==============================\n");
       console.print("\nThis program is free software;"
                     "you can redistribute it and/or"

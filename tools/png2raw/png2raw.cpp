@@ -216,9 +216,10 @@ public:
         int tile_width = get_width()/8;
         for(int i = 0; i < num_tiles; ++i)
           {
+            char* tile_start = reinterpret_cast<char*>(ptr + 64*tile_width*(i/tile_width) + 8*(i%tile_width));
             for(int y = 0; y < 8; ++y)
               {
-                out.write(reinterpret_cast<char*>(ptr + 64*(i/tile_width) + 8*(i%tile_width) + y*pitch), 8);
+                out.write(tile_start + y*pitch, 8);
               }
           }
       }
