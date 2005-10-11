@@ -101,32 +101,32 @@ int main(void)
 
   ScanKeys();
 
-  bg_scroll scroll;
-  scroll.x  = 0;
-  scroll.y  = 0;
+  int16_t scroll_x  = 0;
+  int16_t scroll_y  = 0;
 
   while (1)
     {
       u16 keys = KeysHeld();
       if (keys & KEY_UP)
         {
-          scroll.y  += 1;
+          scroll_y -= 4;
         }
       else if (keys & KEY_DOWN)
         {
-          scroll.y -= 1;
+          scroll_y += 4;
         }
       
       if (keys & KEY_LEFT)
         {
-          scroll.x += 1;
+          scroll_x -= 4;
         }
       else if (keys & KEY_RIGHT)
         {
-          scroll.x -= 1;
+          scroll_x += 4;
         }
 
-      tile_renderer->set_tilemap_offset(1, scroll.x, scroll.y);
+      tile_renderer->set_tilemap_offset(1, scroll_x, scroll_y);
+      tile_renderer->get_tilemap_offset(1, scroll_x, scroll_y);
 
       VBlankIntrWait();
     }

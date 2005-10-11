@@ -64,39 +64,73 @@ TileRenderer::done()
 }
 
 void
-TileRenderer::set_tilemap_offset(uint8_t layer_num, uint16_t x_offset, uint16_t y_offset)
+TileRenderer::set_tilemap_offset(uint8_t layer_num, int16_t x_offset, int16_t y_offset)
 {
-  layers[layer_num].new_log_x = Math::mid(0, (int)x_offset, layers[layer_num].tilemap->get_width()  - 32);
-  layers[layer_num].new_log_y = Math::mid(0, (int)y_offset, layers[layer_num].tilemap->get_height() - 32);
+  layers[layer_num].new_x_offset = Math::mid(0, (int)x_offset, layers[layer_num].tilemap->get_width() *8 - 32*8);
+  layers[layer_num].new_y_offset = Math::mid(0, (int)y_offset, layers[layer_num].tilemap->get_height()*8 - 20*8);
 
-  process_layer(layer_num);
+  layers[layer_num].x_offset = layers[layer_num].new_x_offset;
+  layers[layer_num].y_offset = layers[layer_num].new_y_offset;
+
+  bg_scroll scroll;
+  scroll.x = layers[layer_num].new_x_offset;
+  scroll.y = layers[layer_num].new_y_offset;
+  BG_OFFSET[1] = scroll;
+
+  console.moveto(0,10);
+  console << layers[layer_num].new_x_offset << "x" << layers[layer_num].new_y_offset << "   \n";
+  
+  copy_tilemap(layer_num);
+  // process_layer(layer_num);
+}
+
+void
+TileRenderer::get_tilemap_offset(uint8_t layer_num, int16_t& x_offset, int16_t& y_offset)
+{
+  x_offset = layers[layer_num].x_offset;
+  y_offset = layers[layer_num].y_offset;
 }
 
 void
 TileRenderer::copy_tilemap(uint8_t layer_num)
 {
   Layer& layer = layers[layer_num];
+  /*
   for(uint8_t x = 0; x < 32; ++x)
-    for(uint8_t y = 0; y < 32; ++y)
+    for(uint8_t y = 0; y < 32 && (layer.y_offset/8 + y < layer.tilemap->get_height()); ++y)
       {
-        uint16_t& tile = layer.vram[(y) * 32 + (x)];
+        uint16_t& tile = layer.vram[y * 32 + (x)];
         tile_manager->delete_vram_tile(tile);
-        tile = tile_manager->create_vram_tile(layer.tilemap->get_data()[(y+layer.new_log_y) 
-                                                                        * layer.tilemap->get_width()
-                                                                        + (x+layer.new_log_x)]);
+        tile = tile_manager->create_vram_tile(layer.tilemap->get_data()
+                                              [((layer.y_offset/8) + y) * layer.tilemap->get_width() 
+                                               + ((layer.x_offset/8) + x)]);
       }
+  */
+
+  uint16_t start_x = layer.x_offset/8;
+  uint16_t start_y = layer.y_offset/8;
+  for(uint8_t x = start_x; x < start_x + 32; ++x)
+    for(uint8_t y = start_y; y < start_y + 32 && (y < layer.tilemap->get_height()); ++y)
+      {
+        uint16_t& tile = layer.vram[(y%32) * 32 + (x%32)];
+        tile_manager->delete_vram_tile(tile);
+        tile = tile_manager->create_vram_tile(layer.tilemap->get_data()
+                                              [(y) * layer.tilemap->get_width() 
+                                               + (x)]);
+      }
+
 }
 
 void
 TileRenderer::process_layer(uint8_t layer_num)
 {
   Layer& layer = layers[layer_num];
-  if (layer.log_x != layer.new_log_x || layer.log_y != layer.new_log_y)
+  if (layer.x_offset != layer.new_x_offset || layer.y_offset != layer.new_y_offset)
     { // Layer has moved so we need to refill the tilemap
-      int16_t diff_x = (layer.new_log_x/8) - (layer.log_x/8);
+      int16_t diff_x = (layer.new_x_offset/8) - (layer.x_offset/8);
       if (diff_x == 0)
         { // We are still in the same tile segment, nothing to change
-          layer.log_x = layer.new_log_x;
+          layer.x_offset = layer.new_x_offset;
         }
       else if (abs(diff_x) >= 32)
         { // fullscreen refresh
@@ -104,7 +138,7 @@ TileRenderer::process_layer(uint8_t layer_num)
         }
       else if (diff_x > 0)
         {
-          for(int8_t x = (layer.log_x/8)%32; x < (layer.log_x/8)%32; ++x)
+          for(int8_t x = (layer.x_offset/8)%32; x < (layer.x_offset/8)%32; ++x)
             {
               for(uint8_t y = 0; y < 32; ++y)
                 {

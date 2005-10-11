@@ -59,11 +59,13 @@ TileManager::TileManager()
         ((uint16_t*)CHAR_BASE_ADR(0))[(MAX_VRAM_ID+rom_id)*32 + i] = ((uint16_t*)font_img_raw)[rom_id*32 + i];
     }
 
+#ifndef ENABLE_DYNMAMIC_TILE_ALLOCATION
   console.print("Uploading tiles\n");
   for(uint16_t i = 0; i < MAX_VRAM_ID; ++i)
     {
       upload_tile(i, i);
     }
+#endif
 }
 
 TileManager::~TileManager()

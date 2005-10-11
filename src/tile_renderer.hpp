@@ -36,21 +36,19 @@ private:
   struct Layer {
     uint16_t* vram;
     TileMap*  tilemap;
-    uint16_t log_x;
-    uint16_t log_y;
-    uint16_t new_log_x;
-    uint16_t new_log_y;
-    uint8_t x_offset;
-    uint8_t y_offset;
+    uint16_t x_offset;
+    uint16_t y_offset;
+
+    uint16_t new_x_offset;
+    uint16_t new_y_offset;
 
     Layer() {}
 
     Layer(uint8_t num)
       : vram((uint16_t*)MAP_BASE_ADR(28 + num)),
         tilemap(0), 
-        log_x(0), log_y(0),
-        new_log_x(0), new_log_y(0),
-        x_offset(0), y_offset(0)
+        x_offset(0), y_offset(0),
+        new_x_offset(0), new_y_offset(0)
     {}
   };
 
@@ -69,7 +67,9 @@ public:
   void set_tilemap(uint8_t layer_num, TileMap* tilemap);
 
   /** Set the offset for the given layer */
-  void set_tilemap_offset(uint8_t layer_num, uint16_t x_offset, uint16_t y_offset);
+  void set_tilemap_offset(uint8_t layer_num, int16_t x_offset, int16_t y_offset);
+
+  void get_tilemap_offset(uint8_t layer_num, int16_t& x_offset, int16_t& y_offset);
 
   void set_palette(const void* pal);
 
