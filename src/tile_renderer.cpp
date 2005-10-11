@@ -75,11 +75,8 @@ TileRenderer::set_tilemap_offset(uint8_t layer_num, int16_t x_offset, int16_t y_
   bg_scroll scroll;
   scroll.x = layers[layer_num].new_x_offset;
   scroll.y = layers[layer_num].new_y_offset;
-  BG_OFFSET[1] = scroll;
+  BG_OFFSET[layer_num] = scroll;
 
-  console.moveto(0,10);
-  console << layers[layer_num].new_x_offset << "x" << layers[layer_num].new_y_offset << "   \n";
-  
   copy_tilemap(layer_num);
   // process_layer(layer_num);
 }

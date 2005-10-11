@@ -60,7 +60,6 @@ TileManager::TileManager()
     }
 
 #ifndef ENABLE_DYNMAMIC_TILE_ALLOCATION
-  console.print("Uploading tiles\n");
   for(uint16_t i = 0; i < MAX_VRAM_ID; ++i)
     {
       upload_tile(i, i);
@@ -150,7 +149,6 @@ TileManager::upload_tile(uint16_t rom_id, uint16_t vram_id)
 void
 TileManager::set_tileset(Tileset* tileset_)
 {
-  console << "Setting tileset" << "\n";
   tileset = tileset_;
 }
 

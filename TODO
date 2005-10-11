@@ -1,0 +1,11 @@
+SuperTux Portable Todo
+======================
+
+- create a proper palette layout
+- implement delta-refresh for TileRenderer
+- fix dynamic tile allocation
+- implement collision info loading
+- implement sprite handling
+- fix makefiles to handle levels and such directly without renaming to .raw
+
+# EOF #
