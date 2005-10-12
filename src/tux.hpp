@@ -30,6 +30,9 @@ class Tux
 private:
   Sprite* sprite;
 
+  int x_pos;
+  int y_pos;
+
   int16_t scroll_x;
   int16_t scroll_y;
 

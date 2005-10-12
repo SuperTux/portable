@@ -55,9 +55,9 @@ SpriteRenderer::update()
       Sprite& sprite = sprites[i];
       if (sprite.is_enabled())
         {
-          OAM[i].attr0 = OBJ_Y((sprite.get_y() - sprite.get_data().get_y_align()) & 0xFF) | OBJ_SHAPE(0) | OBJ_256_COLOR;
+          OAM[i].attr0 = OBJ_Y((sprite.get_y() - sprite.get_data().get_y_align() - y_offset) & 0xFF) | OBJ_SHAPE(0) | OBJ_256_COLOR;
           OAM[i].attr1 = 
-            OBJ_X((sprite.get_x() - sprite.get_data().get_x_align()) & 0xFF) |
+            OBJ_X((sprite.get_x() - sprite.get_data().get_x_align() - x_offset) & 0xFF) |
             OBJ_SIZE(2) |
             (sprite.get_vflip() ? OBJ_VFLIP : 0) |
             (sprite.get_hflip() ? OBJ_HFLIP : 0);

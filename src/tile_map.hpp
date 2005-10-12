@@ -24,10 +24,14 @@
 
 #include "types.hpp"
 
+class Tileset;
+
 /** */
 class TileMap
 {
 private:
+  Tileset* tileset;
+
   /** Width of the TileMap */
   uint16_t  width;
 
@@ -38,13 +42,14 @@ private:
   uint16_t* tilemap;
 
 public:
-  TileMap(uint16_t width, uint16_t height, uint16_t* data);
-  TileMap(uint16_t* raw_data);
+  TileMap(Tileset* tileset, uint16_t* raw_data);
   ~TileMap();
 
   inline uint16_t* get_data()   const { return tilemap; }
   inline uint16_t  get_width()  const { return width; }
   inline uint16_t  get_height() const { return height; }
+
+  uint8_t get_colmap(int x, int y) const;
 
 private:
   TileMap (const TileMap&);

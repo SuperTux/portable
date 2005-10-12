@@ -21,8 +21,9 @@
 
 #include "tileset.hpp"
 
-Tileset::Tileset(const void* data_)
-  : data(static_cast<const uint16_t*>(data_))
+Tileset::Tileset(const void* data_, const void* colmap_)
+  : data(static_cast<const uint16_t*>(data_)),
+    colmap(static_cast<const uint8_t*>(colmap_))
 {
 }
 
@@ -31,9 +32,15 @@ Tileset::~Tileset()
 }
 
 const uint16_t*
-Tileset::get_tile(uint16_t id)
+Tileset::get_tile(uint16_t id) const
 {
   return data + (32 * id);
+}
+
+uint8_t
+Tileset::get_colmap(uint16_t id) const
+{
+  return colmap[id]; 
 }
 
 /* EOF */

@@ -37,6 +37,7 @@ private:
   int frame;
   bool hflip;
   bool vflip;
+
 public:
   Sprite();
   Sprite(const SpriteData& data_);
