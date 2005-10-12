@@ -32,6 +32,9 @@
 #include <stdlib.h>
 
 // Data for use in the game
+#include "../build/sprites_img_raw.h"
+#include "../build/sprites_pal_raw.h"
+
 #include "../build/antarctica_img_raw.h"
 #include "../build/antarctica_pal_raw.h"
 #include "../build/interactive_raw.h"
@@ -42,6 +45,8 @@
 #include "tile_map.hpp"
 #include "console.hpp"
 #include "tile_renderer.hpp"
+#include "sprite_manager.hpp"
+#include "sprite_renderer.hpp"
 
 unsigned int frame;
 
@@ -64,7 +69,7 @@ int main(void)
   // Allow Interrupts
   REG_IME = 1;
 
-  SetMode( MODE_0 | BG0_ON | BG1_ON | BG2_ON | BG3_ON );		// screen mode & background to display
+  SetMode( MODE_0 | BG0_ON | BG1_ON | BG2_ON | BG3_ON | OBJ_ON );		// screen mode & background to display
 
   // console layer
   BGCTRL[0] = BG_PRIORITY(0) | CHAR_BASE(0) | BG_MOSAIC | BG_256_COLOR | SCREEN_BASE(28) | BG_SIZE_0;
@@ -75,9 +80,15 @@ int main(void)
   TileManager  stack_tile_manager;
   TileRenderer stack_tile_renderer;
 
+  SpriteManager  stack_sprite_manager;
+  SpriteRenderer stack_sprite_renderer;
+
   tile_manager  = &stack_tile_manager;
   tile_renderer = &stack_tile_renderer;
   
+  sprite_renderer = &stack_sprite_renderer;
+  sprite_manager  = &stack_sprite_manager;
+
   Tileset tileset(antarctica_img_raw);
 
   TileMap interactive((uint16_t*)interactive_raw);
@@ -90,6 +101,9 @@ int main(void)
   tile_renderer->set_tilemap(3, &skybox);
   tile_renderer->set_palette(antarctica_pal_raw);
   tile_renderer->done();
+
+  sprite_renderer->set_palette(sprites_pal_raw);
+  sprite_manager->upload((uint16_t*)sprites_img_raw);
 
   if (0)
     {

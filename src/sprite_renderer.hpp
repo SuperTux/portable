@@ -27,6 +27,10 @@ class SpriteRenderer
 {
 private:
 public:
+  SpriteRenderer();
+  ~SpriteRenderer();
+
+  void set_palette(const void* pal);
 
 private:
   SpriteRenderer (const SpriteRenderer&);

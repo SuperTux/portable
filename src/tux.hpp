@@ -19,24 +19,19 @@
 **  02111-1307, USA.
 */
 
-#ifndef HEADER_SPRITE_HPP
-#define HEADER_SPRITE_HPP
-
-#include "types.hpp"
+#ifndef HEADER_TUX_HPP
+#define HEADER_TUX_HPP
 
 /** */
-class Sprite
+class Tux
 {
 private:
+  
 public:
-  Sprite();
-
-  void set_x(uint8_t x);
-  void set_y(uint8_t y);
-
+  
 private:
-  Sprite (const Sprite&);
-  Sprite& operator= (const Sprite&);
+  Tux (const Tux&);
+  Tux& operator= (const Tux&);
 };
 
 #endif

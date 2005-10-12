@@ -19,26 +19,39 @@
 **  02111-1307, USA.
 */
 
-#ifndef HEADER_SPRITE_HPP
-#define HEADER_SPRITE_HPP
+#include "sprite_data.hpp"
 
-#include "types.hpp"
-
-/** */
-class Sprite
+SpriteData::SpriteData(uint16_t* data_)
+  : data(data_)
 {
-private:
-public:
-  Sprite();
+}
 
-  void set_x(uint8_t x);
-  void set_y(uint8_t y);
+SpriteData::~SpriteData()
+{
+}
 
-private:
-  Sprite (const Sprite&);
-  Sprite& operator= (const Sprite&);
-};
+uint16_t
+SpriteData::get_char_addr(int frame) const
+{
+  return 2*data[2 + frame];
+}
 
-#endif
+uint16_t
+SpriteData::get_frames() const
+{
+  return data[0];
+}
+
+uint16_t
+SpriteData::get_width()  const
+{
+  return data[1];
+}
+
+uint16_t
+SpriteData::get_height() const
+{
+  return data[2];
+}
 
 /* EOF */

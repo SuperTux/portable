@@ -19,26 +19,11 @@
 **  02111-1307, USA.
 */
 
-#ifndef HEADER_SPRITE_HPP
-#define HEADER_SPRITE_HPP
+#include "sprite_data.hpp"
+#include "data.hpp"
 
-#include "types.hpp"
-
-/** */
-class Sprite
-{
-private:
-public:
-  Sprite();
-
-  void set_x(uint8_t x);
-  void set_y(uint8_t y);
-
-private:
-  Sprite (const Sprite&);
-  Sprite& operator= (const Sprite&);
-};
-
-#endif
+//                              w, h, fps, frame, frames...
+uint16_t   tuxsprite_rawdata[] = { 2, 1,  2, 2,  10, 10,  12, 10  };
+SpriteData tuxsprite_data(tuxsprite_rawdata);
 
 /* EOF */

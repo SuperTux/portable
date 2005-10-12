@@ -1,6 +1,10 @@
 /*  $Id$
-**
-**  SuperTux Portable
+**   __      __ __             ___        __   __ __   __
+**  /  \    /  \__| ____    __| _/_______/  |_|__|  | |  |   ____
+**  \   \/\/   /  |/    \  / __ |/  ___/\   __\  |  | |  | _/ __ \
+**   \        /|  |   |  \/ /_/ |\___ \  |  | |  |  |_|  |_\  ___/
+**    \__/\  / |__|___|  /\____ /____  > |__| |__|____/____/\___  >
+**         \/          \/      \/    \/                         \/
 **  Copyright (C) 2005 Ingo Ruhnke <grumbel@gmx.de>
 **
 **  This program is free software; you can redistribute it and/or
@@ -19,24 +23,23 @@
 **  02111-1307, USA.
 */
 
-#ifndef HEADER_SPRITE_HPP
-#define HEADER_SPRITE_HPP
+#ifndef HEADER_SPRITE_MANAGER_HPP
+#define HEADER_SPRITE_MANAGER_HPP
 
 #include "types.hpp"
 
 /** */
-class Sprite
+class SpriteManager
 {
 private:
 public:
-  Sprite();
+  SpriteManager();
+  ~SpriteManager();
 
-  void set_x(uint8_t x);
-  void set_y(uint8_t y);
-
+  void upload(uint16_t* data);
 private:
-  Sprite (const Sprite&);
-  Sprite& operator= (const Sprite&);
+  SpriteManager (const SpriteManager&);
+  SpriteManager& operator= (const SpriteManager&);
 };
 
 #endif
