@@ -26,7 +26,6 @@
 #include <math.h>
 
 #include "globals.hpp"
-#include "video.hpp"
 #include "math.hpp"
 
 #include <stdlib.h>

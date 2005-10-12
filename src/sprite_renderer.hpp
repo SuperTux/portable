@@ -31,7 +31,7 @@ public:
   ~SpriteRenderer();
 
   void set_palette(const void* pal);
-
+  void update();
 private:
   SpriteRenderer (const SpriteRenderer&);
   SpriteRenderer& operator= (const SpriteRenderer&);

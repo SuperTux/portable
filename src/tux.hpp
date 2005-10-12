@@ -26,9 +26,14 @@
 class Tux
 {
 private:
-  
+  Sprite sprite;
+
 public:
+  Tux();
+  ~Tux();
   
+  void update();
+
 private:
   Tux (const Tux&);
   Tux& operator= (const Tux&);

@@ -21,6 +21,11 @@
 
 #include "sprite_data.hpp"
 
+SpriteData::SpriteData()
+  : data(0)
+{
+}
+
 SpriteData::SpriteData(uint16_t* data_)
   : data(data_)
 {

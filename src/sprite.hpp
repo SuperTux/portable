@@ -22,18 +22,24 @@
 #ifndef HEADER_SPRITE_HPP
 #define HEADER_SPRITE_HPP
 
+#include "sprite_data.hpp"
 #include "types.hpp"
 
 /** */
 class Sprite
 {
 private:
+  bool enabled;
+  SpriteData data;
+  int x;
+  int y;
+
 public:
   Sprite();
+  Sprite(const SpriteData& data_);
 
-  void set_x(uint8_t x);
-  void set_y(uint8_t y);
-
+  void set_pos(int x, int y);
+  
 private:
   Sprite (const Sprite&);
   Sprite& operator= (const Sprite&);

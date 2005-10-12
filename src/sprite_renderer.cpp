@@ -43,4 +43,9 @@ SpriteRenderer::set_palette(const void* pal)
     OBJ_COLORS[i] = ((u16*)pal)[i];
 }
 
+void
+SpriteRenderer::update()
+{
+}
+
 /* EOF */

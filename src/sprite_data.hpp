@@ -31,6 +31,7 @@ private:
   uint16_t* data;
 
 public:
+  SpriteData();
   SpriteData(uint16_t* data_);
   ~SpriteData();
 

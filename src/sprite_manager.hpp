@@ -36,6 +36,7 @@ public:
   SpriteManager();
   ~SpriteManager();
 
+  /** Uploads a raw image of size 128x256 to the VRAM */
   void upload(uint16_t* data);
 private:
   SpriteManager (const SpriteManager&);

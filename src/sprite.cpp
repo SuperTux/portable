@@ -22,7 +22,21 @@
 #include "sprite.hpp"
 
 Sprite::Sprite()
+  : enabled(false)
 {
+}
+
+Sprite::Sprite(const SpriteData& data_)
+  : enabled(true), data(data_), x(0), y(0)
+{
+ 
+}
+
+void
+Sprite::set_pos(int x_, int y_)
+{
+  x = x_;
+  y = y_;
 }
 
 /* EOF */
