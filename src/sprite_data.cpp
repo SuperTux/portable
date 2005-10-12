@@ -38,25 +38,45 @@ SpriteData::~SpriteData()
 uint16_t
 SpriteData::get_char_addr(int frame) const
 {
-  return 2*data[2 + frame];
+  uint16_t& x = data[6 + (2*frame)];
+  uint16_t& y = data[6 + (2*frame) + 1];
+  return 2*(16 * y + x);
 }
 
 uint16_t
 SpriteData::get_frames() const
 {
-  return data[0];
+  return data[5];
+}
+
+uint16_t
+SpriteData::get_fps() const
+{
+  return data[4];
 }
 
 uint16_t
 SpriteData::get_width()  const
 {
-  return data[1];
+  return data[0];
 }
 
 uint16_t
 SpriteData::get_height() const
 {
+  return data[1];
+}
+
+uint16_t
+SpriteData::get_x_align() const
+{
   return data[2];
+}
+
+uint16_t
+SpriteData::get_y_align() const
+{
+  return data[3];
 }
 
 /* EOF */

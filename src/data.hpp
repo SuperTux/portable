@@ -24,7 +24,7 @@
 
 #include "types.hpp"
 
-extern SpriteData tuxsprite_data;
+extern SpriteData tux_sprite_data;
 
 #endif
 

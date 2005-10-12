@@ -41,6 +41,11 @@ public:
 
   uint16_t get_width()  const;
   uint16_t get_height() const;
+
+  uint16_t get_fps() const;
+
+  uint16_t get_x_align() const;
+  uint16_t get_y_align() const;
 };
 
 #endif

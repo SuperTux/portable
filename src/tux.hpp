@@ -22,11 +22,16 @@
 #ifndef HEADER_TUX_HPP
 #define HEADER_TUX_HPP
 
+class Sprite;
+
 /** */
 class Tux
 {
 private:
-  Sprite sprite;
+  Sprite* sprite;
+
+  int16_t scroll_x;
+  int16_t scroll_y;
 
 public:
   Tux();

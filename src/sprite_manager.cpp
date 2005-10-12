@@ -35,17 +35,4 @@ SpriteManager::~SpriteManager()
 {
 }
 
-void
-SpriteManager::upload(uint16_t* data)
-{
-  for(int i = 0; i < 32 * 512; ++i)
-    {
-      ((uint16_t*)OBJ_BASE_ADR)[i] = data[i];
-    }
-
-  OAM[0].attr0 = OBJ_Y(80)  | OBJ_SHAPE(0) | OBJ_256_COLOR;
-  OAM[0].attr1 = OBJ_X(120) | OBJ_SIZE(2);
-  OAM[0].attr2 = OBJ_CHAR(8) | OBJ_PALETTE(0) | OBJ_PRIORITY(0);
-}
-
 /* EOF */

@@ -22,8 +22,8 @@
 #include "sprite_data.hpp"
 #include "data.hpp"
 
-//                              w, h, fps, frame, frames...
-uint16_t   tuxsprite_rawdata[] = { 2, 1,  2, 2,  10, 10,  12, 10  };
-SpriteData tuxsprite_data(tuxsprite_rawdata);
+//                                  w, h, align, fps, frames, frames...
+uint16_t   tux_sprite_rawdata[] = { 2, 2, 16,32,  6,     6,   0,0,  4,0,  8,0,  12,0,  0,4,  4,4  };
+SpriteData tux_sprite_data(tux_sprite_rawdata);
 
 /* EOF */

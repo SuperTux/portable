@@ -28,7 +28,10 @@
 
 #include "types.hpp"
 
-/** */
+/** Class for handling sprite allocation, at the moment unused, all
+    code is in SpriteRenderer and will be refactored into this one
+    later on
+ */
 class SpriteManager
 {
 private:
@@ -36,8 +39,6 @@ public:
   SpriteManager();
   ~SpriteManager();
 
-  /** Uploads a raw image of size 128x256 to the VRAM */
-  void upload(uint16_t* data);
 private:
   SpriteManager (const SpriteManager&);
   SpriteManager& operator= (const SpriteManager&);

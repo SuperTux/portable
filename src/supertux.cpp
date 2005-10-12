@@ -43,6 +43,7 @@
 #include "tileset.hpp"
 #include "tile_map.hpp"
 #include "console.hpp"
+#include "tux.hpp"
 #include "tile_renderer.hpp"
 #include "sprite_manager.hpp"
 #include "sprite_renderer.hpp"
@@ -102,7 +103,7 @@ int main(void)
   tile_renderer->done();
 
   sprite_renderer->set_palette(sprites_pal_raw);
-  sprite_manager->upload((uint16_t*)sprites_img_raw);
+  sprite_renderer->upload((uint16_t*)sprites_img_raw);
 
   if (0)
     {
@@ -123,56 +124,14 @@ int main(void)
       console.print("SupeTux Portable Version 0.0.0\n");
     }
 
+  Tux tux;
+
   ScanKeys();
-
-  int16_t scroll_x  = 0;
-  int16_t scroll_y  = 0;
-
-  int16_t scroll1_x  = 0;
-  int16_t scroll1_y  = 0;
-
-  int16_t scroll2_x  = 0;
-  int16_t scroll2_y  = 0;
-
 
   while (1)
     {
-      u16 keys = KeysHeld();
-      if (keys & KEY_UP)
-        {
-          scroll_y -= 4;
-          scroll1_y -= 2;
-          scroll2_y -= 1;
-        }
-      else if (keys & KEY_DOWN)
-        {
-          scroll_y += 4;
-          scroll1_y += 2;
-          scroll2_y += 1;
-        }
-      
-      if (keys & KEY_LEFT)
-        {
-          scroll_x -= 4;
-          scroll1_x -= 2;
-          scroll2_x -= 1;
-        }
-      else if (keys & KEY_RIGHT)
-        {
-          scroll_x += 4;
-          scroll1_x += 2;
-          scroll2_x += 1;
-        }
-
-      tile_renderer->set_tilemap_offset(1, scroll_x, scroll_y);
-      tile_renderer->get_tilemap_offset(1, scroll_x, scroll_y);
-
-      tile_renderer->set_tilemap_offset(2, scroll1_x, scroll1_y);
-      tile_renderer->get_tilemap_offset(2, scroll1_x, scroll1_y);
-
-      tile_renderer->set_tilemap_offset(3, scroll2_x, scroll2_y);
-      tile_renderer->get_tilemap_offset(3, scroll2_x, scroll2_y);
-
+      tux.update();
+      sprite_renderer->update();
       VBlankIntrWait();
     }
 }

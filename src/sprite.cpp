@@ -27,7 +27,7 @@ Sprite::Sprite()
 }
 
 Sprite::Sprite(const SpriteData& data_)
-  : enabled(true), data(data_), x(0), y(0)
+  : enabled(true), data(data_), x(0), y(0), world_co(true), hflip(false), vflip(false)
 {
  
 }
@@ -37,6 +37,13 @@ Sprite::set_pos(int x_, int y_)
 {
   x = x_;
   y = y_;
+}
+
+void
+Sprite::update()
+{
+  frame += 1;
+  frame %= data.get_frames();
 }
 
 /* EOF */
