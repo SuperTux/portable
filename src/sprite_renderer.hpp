@@ -30,6 +30,7 @@ class SpriteRenderer
 private:
   Sprite sprites[128];
   
+  int next_free;
   int x_offset;
   int y_offset;
 

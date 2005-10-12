@@ -29,6 +29,7 @@
 #include "sprite_renderer.hpp"
 
 SpriteRenderer::SpriteRenderer()
+  : next_free(0)
 {
 }
 
@@ -94,8 +95,8 @@ SpriteRenderer::set_offset(int x, int y)
 Sprite*
 SpriteRenderer::create(const SpriteData& data)
 {
-  sprites[0] = Sprite(data);
-  return &sprites[0];
+  sprites[next_free] = Sprite(data);
+  return &sprites[next_free++];
 }
 
 /* EOF */

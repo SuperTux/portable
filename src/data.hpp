@@ -25,6 +25,7 @@
 #include "types.hpp"
 
 extern SpriteData tux_sprite_data;
+extern SpriteData mriceblock_sprite_data;
 
 #endif
 

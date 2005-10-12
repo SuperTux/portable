@@ -39,16 +39,12 @@ private:
     uint16_t x_offset;
     uint16_t y_offset;
 
-    uint16_t new_x_offset;
-    uint16_t new_y_offset;
-
     Layer() {}
 
     Layer(uint8_t num)
       : vram((uint16_t*)MAP_BASE_ADR(28 + num)),
         tilemap(0), 
-        x_offset(0), y_offset(0),
-        new_x_offset(0), new_y_offset(0)
+        x_offset(0), y_offset(0)
     {}
   };
 
@@ -66,15 +62,13 @@ public:
       to disable the layer */
   void set_tilemap(uint8_t layer_num, TileMap* tilemap);
 
-  /** Set the offset for the given layer */
+  /** Set the offset for the given layer (this copies stuff to VRAM,
+      so use only once per loop) */
   void set_tilemap_offset(uint8_t layer_num, int16_t x_offset, int16_t y_offset);
 
   void get_tilemap_offset(uint8_t layer_num, int16_t& x_offset, int16_t& y_offset);
 
   void set_palette(const void* pal);
-
-  /** */
-  void process_layer(uint8_t layer_num);
 
   /** Copies the complete visible part of the tilemap over into VRAM */
   void copy_tilemap(uint8_t layer_num);

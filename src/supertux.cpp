@@ -53,7 +53,12 @@ unsigned int frame;
 void VblankInterrupt()
 {
   frame += 1;
-  ScanKeys();
+}
+
+void vid_vsync()
+{
+    while(REG_VCOUNT >= 160);   // wait till VDraw
+    while(REG_VCOUNT < 160);    // wait till VBlank
 }
 
 int main(void)
@@ -61,10 +66,10 @@ int main(void)
   // Set up the interrupt handlers
   InitInterrupt();
 
-  SetInterrupt( Int_Vblank, VblankInterrupt);
+  //SetInterrupt( Int_Vblank, VblankInterrupt);
 
   // Enable Vblank Interrupt to allow VblankIntrWait
-  EnableInterrupt(Int_Vblank);
+  //EnableInterrupt(Int_Vblank);
 
   // Allow Interrupts
   REG_IME = 1;
@@ -132,7 +137,9 @@ int main(void)
     {
       tux.update();
       sprite_renderer->update();
-      VBlankIntrWait();
+      ScanKeys();
+      //VBlankIntrWait();
+      vid_vsync();
     }
 }
 
