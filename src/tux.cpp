@@ -30,7 +30,8 @@
 #include "console.hpp"
 
 Tux::Tux()
-  : sprite(sprite_renderer->create(tux_sprite_data))
+  : sprite(sprite_renderer->create(tux_sprite_data)),
+    contact(&air_contact)
 {
   x_pos = 360;
   y_pos = 150;

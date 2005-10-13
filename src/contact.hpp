@@ -22,24 +22,36 @@
 **  02111-1307, USA.
 */
 
-#ifndef HEADER_GLOBALS_HPP
-#define HEADER_GLOBALS_HPP
+#ifndef HEADER_CONTACT_HPP
+#define HEADER_CONTACT_HPP
 
-class TileManager;
-class TileRenderer;
+/** */
+class Contact
+{
+protected:
+  int x_pos;
+  int y_pos;
+  
+public:
+  Contact();
+  virtual ~Contact() {}
+  
+  virtual void set_pos(int x, int y) =0;
+};
 
-class SpriteManager;
-class SpriteRenderer;
+class GroundContact : public Contact
+{
+public:
+  GroundContact();
+  void set_pos(int x, int y);
+};
 
-class TileMap;
-
-extern TileManager*  tile_manager;
-extern TileRenderer* tile_renderer;
-
-extern SpriteManager*  sprite_manager;
-extern SpriteRenderer* sprite_renderer;
-
-extern TileMap* tilemap;
+class AirContact : public Contact
+{
+public:
+  AirContact();
+  void set_pos(int x, int y);
+};
 
 #endif
 

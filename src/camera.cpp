@@ -22,25 +22,8 @@
 **  02111-1307, USA.
 */
 
-#ifndef HEADER_GLOBALS_HPP
-#define HEADER_GLOBALS_HPP
+#include "camera.hpp"
 
-class TileManager;
-class TileRenderer;
 
-class SpriteManager;
-class SpriteRenderer;
-
-class TileMap;
-
-extern TileManager*  tile_manager;
-extern TileRenderer* tile_renderer;
-
-extern SpriteManager*  sprite_manager;
-extern SpriteRenderer* sprite_renderer;
-
-extern TileMap* tilemap;
-
-#endif
 
 /* EOF */

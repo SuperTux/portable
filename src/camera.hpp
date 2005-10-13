@@ -22,24 +22,23 @@
 **  02111-1307, USA.
 */
 
-#ifndef HEADER_GLOBALS_HPP
-#define HEADER_GLOBALS_HPP
+#ifndef HEADER_CAMERA_HPP
+#define HEADER_CAMERA_HPP
 
-class TileManager;
-class TileRenderer;
+/** Class for handling scrolling parameter */
+class Camera
+{
+private:
+public:
+  Camera();
+  ~Camera();
+  
+  
 
-class SpriteManager;
-class SpriteRenderer;
-
-class TileMap;
-
-extern TileManager*  tile_manager;
-extern TileRenderer* tile_renderer;
-
-extern SpriteManager*  sprite_manager;
-extern SpriteRenderer* sprite_renderer;
-
-extern TileMap* tilemap;
+private:
+  Camera (const Camera&);
+  Camera& operator= (const Camera&);
+};
 
 #endif
 
