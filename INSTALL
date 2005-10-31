@@ -11,6 +11,8 @@ DEVKITPRO to the directory where you unzipped it and run:
 
  % make
 
-In the top level dir of SuperTux Portable.
+In the top level dir of SuperTux Portable. Currently some of the .raw
+files are not generated automatically, so some manual work with
+'png2raw' is needed to get a clean compile.
 
 # EOF #
