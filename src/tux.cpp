@@ -46,7 +46,7 @@ Tux::update()
 {
   sprite->update();
 
-  u16 keys = KeysHeld();
+  u16 keys = keysHeld();
   int speed = 2;
 
   int last_x = x_pos;

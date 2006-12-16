@@ -17,7 +17,7 @@ export PATH		:=	$(DEVKITARM)/bin:$(PATH)
 #---------------------------------------------------------------------------------
 # the prefix on the compiler executables
 #---------------------------------------------------------------------------------
-PREFIX		:=	arm-elf-
+PREFIX		:=	arm-eabi-
 
 export CC		:=	$(PREFIX)gcc
 export CXX		:=	$(PREFIX)g++

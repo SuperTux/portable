@@ -129,18 +129,18 @@ int main(void)
     }
   else
     {
-      console.print("SupeTux Portable Version 0.0.0\n");
+      console.print("SuperTux Portable Version 0.0.0\n");
     }
 
   Tux tux;
 
-  ScanKeys();
+  scanKeys();
 
   while (1)
     {
       tux.update();
       sprite_renderer->update();
-      ScanKeys();
+      scanKeys();
       //VBlankIntrWait();
       vid_vsync();
     }
