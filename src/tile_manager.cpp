@@ -30,7 +30,7 @@
 #include "../build/font_img_raw.h"
 #include "../build/antarctica_img_raw.h"
 
-//#define ENABLE_DYNMAMIC_TILE_ALLOCATION 1
+//#define ENABLE_DYNAMIC_TILE_ALLOCATION 1
 
 TileManager::TileManager()
   : freelist(refcount),
@@ -58,7 +58,7 @@ TileManager::TileManager()
         ((uint16_t*)CHAR_BASE_ADR(0))[(MAX_VRAM_ID+rom_id)*32 + i] = ((uint16_t*)font_img_raw)[rom_id*32 + i];
     }
 
-#ifndef ENABLE_DYNMAMIC_TILE_ALLOCATION
+#ifndef ENABLE_DYNAMIC_TILE_ALLOCATION
   for(uint16_t i = 0; i < MAX_VRAM_ID; ++i)
     {
       upload_tile(i, i);
@@ -74,7 +74,7 @@ TileManager::~TileManager()
 uint16_t
 TileManager::create_vram_tile(uint16_t rom_id)
 {
-#ifdef ENABLE_DYNMAMIC_TILE_ALLOCATION
+#ifdef ENABLE_DYNAMIC_TILE_ALLOCATION
   if (rom_id == 0)
     {
       // Transparent tile is a special case, ignore
@@ -119,7 +119,7 @@ TileManager::create_vram_tile(uint16_t rom_id)
 void
 TileManager::delete_vram_tile(uint16_t vram_id)
 {
-#ifdef ENABLE_DYNMAMIC_TILE_ALLOCATION
+#ifdef ENABLE_DYNAMIC_TILE_ALLOCATION
   if (vram_id != 0)
     {
       if (refcount[vram_id] <= 1)

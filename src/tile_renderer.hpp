@@ -28,7 +28,7 @@
 class Tileset;
 class TileMap;
 
-/** The TileRenderer handles the mapping from a abitary large Tilemap
+/** The TileRenderer handles the mapping from a arbitrarily large Tilemap
     in ROM to the 32x32 large tilemap in VRAM */
 class TileRenderer
 {

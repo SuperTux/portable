@@ -24,12 +24,12 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-/* To compile this programm:
+/* To compile this program:
 
     % g++ -o png2stratagus  png2stratagus.cpp -lpng
  */
 
-/* This programm can be used to fix the palette of a indexed png file
+/* This program can be used to fix the palette of a indexed png file
    to be suitable for Stratagus. It works like this:
 
    1) You create a RGBA image in Gimp

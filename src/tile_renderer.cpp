@@ -69,7 +69,7 @@ TileRenderer::set_tilemap_offset(uint8_t layer_num, int16_t x_offset, int16_t y_
   Layer& layer = layers[layer_num];
 
   // Cut new offset to the limits of the layer
-  // FIXME: Might be usefull to make limits configurable per layer
+  // FIXME: Might be useful to make limits configurable per layer
   x_offset = Math::mid(0, (int)x_offset, layer.tilemap->get_width() *8 - 32*8);
   y_offset = Math::mid(0, (int)y_offset, layer.tilemap->get_height()*8 - 20*8);
 
@@ -130,7 +130,7 @@ TileRenderer::set_tilemap_offset(uint8_t layer_num, int16_t x_offset, int16_t y_
       // FIXME: The regions of vertical and horizontal refresh may
       // overlap, could be optimized further
 
-      // FIXME: Some off-by-one bug seems to be hiding here, diagonal scrolling causes slight throuble
+      // FIXME: Some off-by-one bug seems to be hiding here, diagonal scrolling causes slight trouble
     }
 
   layer.x_offset = x_offset;
